@@ -310,7 +310,7 @@ class BP_Share_Posts {
 
 		bp_activity_add( array(
 			'action' => apply_filters( 'bp_share_posts_activity_action', $action, $post, $user ),
-			'content' => apply_filters( 'bp_share_posts_activity_action', $excerpt, $post, $user ),
+			'content' => apply_filters( 'bp_share_posts_activity_content', $excerpt, $post, $user ),
 			'component' => 'blogs',
 			'type' => 'share',
 			'primary_link' => $post_url,
