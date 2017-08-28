@@ -19,6 +19,7 @@
 
         this.$container = $(element);
         this.sharedIcon = this.$container.data('shared-icon');
+        this.sharedLabel = this.$container.data('shared-label');
         this.postId = parseInt(this.$container.data('post-id'));
 
         this.init();
@@ -49,11 +50,17 @@
             jQuery
                 .post(ajaxurl, data, function(response) {
                     if (response.success) {
-                        var $icon = jQuery(self.sharedIcon);
+                        if (self.sharedIcon.length) {
+                            var $icon = jQuery(self.sharedIcon);
 
-                        self.$container.find('.bp-share-posts-icon').remove();
-                        self.$container.prepend($icon);
-                        self.$container.addClass('bp-share-posts-shared');
+                            self.$container.find('.bp-share-posts-icon').remove();
+                            self.$container.prepend($icon);
+                            self.$container.addClass('bp-share-posts-shared');
+                        }
+
+                        if (self.sharedLabel.length) {
+                            self.$container.find('.bp-share-posts-label').html(self.sharedLabel);
+                        }
                     }
                 }, 'json')
                 .always(function () {

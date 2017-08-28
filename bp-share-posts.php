@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: BP Share Posts
- * Version: 1.0
+ * Version: 1.0a
  * Plugin URI: https://wearezipline.com
  * Description: Allows members to share posts on their Buddypress activity wall.
  * Author: Zipline

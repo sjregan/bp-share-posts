@@ -214,15 +214,18 @@ class BP_Share_Posts {
 		$icon        = apply_filters( 'bp_share_posts_button_icon', '<i class="bp-share-posts-icon icon-export-alt"></i>' );
 		$shared_icon = apply_filters( 'bp_share_posts_button_shared_icon', '<i class="bp-share-posts-icon icon-ok-circled"></i>' );
 
-		$label = apply_filters( 'bp_share_posts_button_label', __( 'Share', 'bp-share-posts' ) );
+		$label        = apply_filters( 'bp_share_posts_button_label', __( 'Share', 'bp-share-posts' ) );
+		$shared_label = apply_filters( 'bp_share_posts_button_label_shared', __( 'Shared', 'bp-share-posts' ) );
+
 		$url   = add_query_arg( array(
 			'redirect_to' => $_SERVER['REQUEST_URI']
 		), trailingslashit( bp_get_loggedin_user_link() . bp_get_activity_root_slug() . '/share/' . get_the_ID() ) );
 
 		$html = sprintf(
-			'<a href="%s" class="bp-share-posts-button" data-shared-icon="%s" data-post-id="%s">%s %s</a>',
+			'<a href="%1$s" class="bp-share-posts-button" data-shared-icon="%2$s" data-shared-label="%3$s" data-post-id="%4$s">%5$s <span class="bp-share-posts-label">%6$s</span></a>',
 			esc_attr( $url ),
 			esc_attr( $shared_icon ),
+			esc_attr( $shared_label ),
 			get_the_ID(),
 			$icon,
 			$label
