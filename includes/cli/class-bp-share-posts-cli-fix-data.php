@@ -12,7 +12,7 @@ class BP_Share_Posts_Commands extends \WP_CLI_Command {
      *     wp bp_share_posts fix
      *
      * @when  after_wp_load
-     * @since NEXT
+     * @since 1.1.0
      */
     public function fix( $args, $assoc_args ) {
         $activities = bp_activity_get( array(
@@ -46,7 +46,7 @@ class BP_Share_Posts_Commands extends \WP_CLI_Command {
     /**
      * Update user as having shared activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param object $activity
      */

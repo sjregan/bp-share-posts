@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Extends posts endpoint.
+ * Extends activities endpoint.
  *
  * @since 1.1.0
  */
-class BP_Share_Posts_REST_API_Posts extends WP_REST_Posts_Controller {
+class BP_Share_Posts_REST_API_Activities extends BP_REST_Activity_Endpoint {
     /**
-     * @var BP_Share_Posts_REST_API_Post_Status_Field
+     * @var BP_Share_Posts_REST_API_Activity_Status_Field
      * @since 1.1.0
      */
-    public $user_status_field;
+    public $activity_status_field;
 
     /**
      * BP_Share_Posts_REST_API_Posts constructor.
@@ -18,7 +18,7 @@ class BP_Share_Posts_REST_API_Posts extends WP_REST_Posts_Controller {
     public function __construct() {
         parent::__construct( 'post' );
 
-        $this->user_status_field = new BP_Share_Posts_REST_API_Post_Status_Field();
+        $this->activity_status_field = new BP_Share_Posts_REST_API_Activity_Status_Field();
 
         // Register API endpoints
         $this->register_routes();
@@ -42,8 +42,8 @@ class BP_Share_Posts_REST_API_Posts extends WP_REST_Posts_Controller {
                 ],
                 [
                     'methods'             => WP_REST_Server::CREATABLE,
-                    'callback'            => [ $this, 'share_post' ],
-                    'permission_callback' => [ $this, 'share_post_permissions_check' ],
+                    'callback'            => [ $this, 'share_activity' ],
+                    'permission_callback' => [ $this, 'share_activity_permissions_check' ],
                     'args'                => [
                         'status' => [
                             'description' => __( 'New share status.' ),
@@ -65,7 +65,7 @@ class BP_Share_Posts_REST_API_Posts extends WP_REST_Posts_Controller {
      * @param WP_REST_Request $request
      * @return bool|WP_Error
      */
-    public function share_post_permissions_check( $request ) {
+    public function share_activity_permissions_check( $request ) {
         if ( ! is_user_logged_in() ) {
             return false;
         }
@@ -74,55 +74,55 @@ class BP_Share_Posts_REST_API_Posts extends WP_REST_Posts_Controller {
     }
 
     /**
-     * Share post.
+     * Share activity.
      *
      * @since 1.1.0
      *
      * @param WP_REST_Request $request
      * @return WP_REST_Response
      */
-    public function share_post( $request ) {
-        $post_id = (int) $request->get_param( 'id' );
-        $shared  = $request->get_param( 'status' ) === 'shared';
+    public function share_activity( $request ) {
+        $activity_id = (int) $request->get_param( 'id' );
+        $shared      = $request->get_param( 'status' ) === 'shared';
 
         if ( $shared ) {
-            $result = $this->share( $post_id );
+            $result = $this->share( $activity_id );
         } else {
-            $result = $this->unshare( $post_id );
+            $result = $this->unshare( $activity_id );
         }
 
         return rest_ensure_response( $result );
     }
 
     /**
-     * Share a post.
+     * Share an activity.
      *
      * @since 1.1.0
      *
-     * @param int $post_id
+     * @param int $activity_id
      * @return bool|int|WP_Error
      */
-    protected function share( $post_id ) {
+    protected function share( $activity_id ) {
         $plugin = BP_Share_Posts();
 
-        if ( $existing_id = $plugin->share_exists( get_current_user_id(), $post_id ) ) {
+        if ( $existing_id = $plugin->shared_activity_exists( $activity_id, get_current_user_id() ) ) {
             return $existing_id;
         }
 
-        return $plugin->share_post( $post_id );
+        return $plugin->share_activity( $activity_id );
     }
 
     /**
-     * Unshare a post.
+     * Unshare an activity.
      *
      * @since 1.1.0
      *
-     * @param int $post_id
+     * @param int $activity_id
      * @return bool|int|WP_Error
      */
-    protected function unshare( $post_id ) {
+    protected function unshare( $activity_id ) {
         $plugin = BP_Share_Posts();
 
-        return $plugin->unshare_post( $post_id );
+        return $plugin->unshare_activity( $activity_id );
     }
 }

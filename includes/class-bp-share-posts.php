@@ -77,7 +77,7 @@ class BP_Share_Posts {
 
     /**
      * @var BP_Share_Posts_REST_API
-     * @since NEXT
+     * @since 1.1.0
      */
 	public $rest_api;
 
@@ -112,7 +112,7 @@ class BP_Share_Posts {
 		add_action( 'init', array( $this, 'register_shortcodes' ) );
 		add_action( 'bp_init', array( $this, 'intercept_share_action' ) );
 		add_action( 'wp_ajax_bp_share_post', array( $this, 'ajax_action' ) );
-        add_action( 'rest_api_init', array( $this, 'init_rest' ) );
+        add_action( 'rest_api_init', array( $this, 'init_rest' ), 11 );
 
 		// Load API for generic admin functions
 		// if ( is_admin() ) {
@@ -207,7 +207,7 @@ class BP_Share_Posts {
 	/**
 	 * Get button HTML.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
 	 * @param array $atts
 	 * @param string $content
@@ -240,7 +240,7 @@ class BP_Share_Posts {
     /**
      * Get button HTML.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param array $atts
      * @param string $content
@@ -275,7 +275,7 @@ class BP_Share_Posts {
     /**
      * Build a button.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param string $type 'post' or 'activity'
      * @param int    $item_id
@@ -428,7 +428,7 @@ class BP_Share_Posts {
     /**
      * Unshare a post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $post_id
      * @return bool Returns true if unshared, otherwise false.
@@ -458,7 +458,7 @@ class BP_Share_Posts {
     /**
      * Share the activity on activity wall.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $item_id
      * @param bool Returns true if shared, otherwise false
@@ -523,7 +523,7 @@ class BP_Share_Posts {
     /**
      * Unshare an activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $item_id
      * @return bool Returns true if unshared, otherwise false.
@@ -553,7 +553,7 @@ class BP_Share_Posts {
     /**
      * Get users who have shared post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $post_id
      * @return array
@@ -575,7 +575,7 @@ class BP_Share_Posts {
     /**
      * Get users who have shared activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $item_id
      * @return array
@@ -597,7 +597,7 @@ class BP_Share_Posts {
     /**
      * Set user as having shared a post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $user_id
      * @param int $post_id
@@ -615,7 +615,7 @@ class BP_Share_Posts {
     /**
      * Remove user as having shared a post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $user_id
      * @param int $post_id
@@ -627,7 +627,7 @@ class BP_Share_Posts {
     /**
      * Get if user has shared post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int      $post_id
      * @param int|null $user_id
@@ -650,7 +650,7 @@ class BP_Share_Posts {
     /**
      * Set user as having shared an activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $user_id
      * @param int $item_id
@@ -668,7 +668,7 @@ class BP_Share_Posts {
     /**
      * Remove user as having shared an activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $user_id
      * @param int $item_id
@@ -680,7 +680,7 @@ class BP_Share_Posts {
     /**
      * Get if user has shared activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int      $post_id
      * @param int|null $user_id
@@ -744,7 +744,7 @@ class BP_Share_Posts {
     /**
      * Determine if user has already shared the activity.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param int $user_id
      * @param int $post_id
@@ -819,7 +819,7 @@ class BP_Share_Posts {
     /**
      * Init REST API.
      *
-     * @since NEXT
+     * @since 1.1.0
      */
 	public function init_rest() {
 	    $this->rest_api = new BP_Share_Posts_REST_API();

@@ -3,7 +3,7 @@
 /**
  * Adds 'bp_share_posts_user_status' field to 'activity' response objects
  *
- * @since NEXT
+ * @since 1.1.0
  */
 class BP_Share_Posts_REST_API_Activity_Status_Field {
     /**
@@ -20,7 +20,7 @@ class BP_Share_Posts_REST_API_Activity_Status_Field {
     /**
      * Retrieves whether the user has shared the post.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @param array           $object  $object_id Object to fetch details for.
      * @param WP_REST_Request $request Full details about the request.
@@ -33,7 +33,7 @@ class BP_Share_Posts_REST_API_Activity_Status_Field {
     /**
      * Retrieves the object's comment count schema, conforming to JSON Schema.
      *
-     * @since NEXT
+     * @since 1.1.0
      *
      * @return array Field schema data.
      */
