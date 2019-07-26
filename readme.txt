@@ -31,6 +31,12 @@ Currently, the share button requires a template to render the button:
 
 == Changelog ==
 
+= 1.1.0 =
+* 2019-07-26
+* Feature: REST endpoints and fields.
+* Feature: share activity updates.
+* Feature: unshare posts.
+
 = 1.0 =
 * 2017-08-18
 * Initial release

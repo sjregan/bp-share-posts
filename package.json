@@ -1,7 +1,7 @@
 {
 	"name": "bp-share-posts",
 	"title": "BP Share Posts",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"homepage": "https://wearezipline.com",
 	"main": "Gruntfile.js",
 	"devDependencies": {
